@@ -1,0 +1,6 @@
+const COMMAND_PERMISSIONS = {
+  PUBLIC: 'PUBLIC',
+  ADMIN: 'ADMIN',
+}
+
+export default COMMAND_PERMISSIONS

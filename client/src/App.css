@@ -1,0 +1,414 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  background: #050505;
+  font-family:
+    "Cascadia Code",
+    "Consolas",
+    "Courier New",
+    monospace;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+.terminal-app {
+  width: 100vw;
+  height: 100vh;
+  padding: 18px;
+  background:
+    radial-gradient(circle at top,
+      #151515 0%,
+      #090909 42%,
+      #030303 100%);
+  color: #d8d8d8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.terminal-window {
+  width: 100%;
+  height: 100%;
+  max-width: 1800px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid #292929;
+  border-radius: 10px;
+  background: #080808;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.02),
+    0 20px 80px rgba(0, 0, 0, 0.7);
+}
+
+.terminal-header {
+  height: 46px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  border-bottom: 1px solid #202020;
+  background: #101010;
+}
+
+.terminal-controls {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 120px;
+}
+
+.terminal-dot {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  display: block;
+}
+
+.dot-red {
+  background: #ff5f56;
+}
+
+.dot-yellow {
+  background: #ffbd2e;
+}
+
+.dot-green {
+  background: #27c93f;
+}
+
+.terminal-title {
+  color: #9b9b9b;
+  font-size: 13px;
+  letter-spacing: 0.4px;
+}
+
+.terminal-version {
+  width: 120px;
+  text-align: right;
+  color: #555;
+  font-size: 11px;
+}
+
+.terminal-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px;
+  scrollbar-width: thin;
+  scrollbar-color: #292929 transparent;
+}
+
+.terminal-body::-webkit-scrollbar {
+  width: 7px;
+}
+
+.terminal-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.terminal-body::-webkit-scrollbar-thumb {
+  background: #292929;
+  border-radius: 10px;
+}
+
+.system-intro {
+  margin-bottom: 30px;
+  color: #bdbdbd;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+.intro-line {
+  color: #292929;
+}
+
+.intro-help {
+  margin-top: 8px;
+  color: #737373;
+}
+
+.intro-help span {
+  color: #cfcfcf;
+}
+
+.command-block {
+  margin-bottom: 25px;
+}
+
+.command-line,
+.command-form {
+  display: flex;
+  align-items: center;
+  min-height: 26px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.prompt {
+  color: #7fdc8a;
+  white-space: nowrap;
+}
+
+.entered-command {
+  margin-left: 10px;
+  color: #f1f1f1;
+}
+
+.command-output {
+  margin-top: 7px;
+  padding-left: 22px;
+  color: #a7a7a7;
+  font-size: 13px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+}
+
+.output-error {
+  color: #e47c7c;
+}
+
+.command-form {
+  width: 100%;
+}
+
+.command-form input {
+  flex: 1;
+  min-width: 0;
+  margin-left: 10px;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: #f1f1f1;
+  caret-color: #d8d8d8;
+}
+
+.terminal-footer {
+  height: 30px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 14px;
+  border-top: 1px solid #202020;
+  background: #0d0d0d;
+  color: #444;
+  font-size: 10px;
+  letter-spacing: 0.8px;
+}
+
+@media (max-width: 700px) {
+  .terminal-app {
+    padding: 0;
+  }
+
+  .terminal-window {
+    border: 0;
+    border-radius: 0;
+  }
+
+  .terminal-body {
+    padding: 20px 16px;
+  }
+
+  .terminal-header {
+    padding: 0 12px;
+  }
+
+  .terminal-version {
+    display: none;
+  }
+
+  .terminal-controls {
+    width: auto;
+  }
+
+  .terminal-title {
+    font-size: 12px;
+  }
+
+  .system-intro,
+  .command-line,
+  .command-form {
+    font-size: 12px;
+  }
+
+  .command-output {
+    font-size: 11px;
+    padding-left: 12px;
+  }
+}
+
+.terminal-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fullscreen-button {
+  width: 28px;
+  height: 24px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: #555;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 17px;
+  line-height: 1;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.fullscreen-button:hover {
+  color: #d8d8d8;
+  transform: scale(1.08);
+}
+
+.fullscreen-button:focus-visible {
+  outline: 1px solid #555;
+  outline-offset: 3px;
+}
+
+.boot-title {
+  color: #d8d8d8;
+}
+
+.boot-line {
+  color: #8f8f8f;
+  line-height: 1.8;
+  animation: boot-line-in 0.25s ease-out;
+}
+
+.boot-prefix {
+  color: #7fdc8a;
+}
+
+.boot-success {
+  color: #7fdc8a;
+  margin-top: 5px;
+  animation: boot-line-in 0.3s ease-out;
+}
+
+@keyframes boot-line-in {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.command-suggestions {
+  margin-top: 8px;
+  margin-bottom: 20px;
+  padding-left: 22px;
+  animation: suggestion-in 0.15s ease-out;
+}
+
+.suggestion-label {
+  margin-bottom: 6px;
+  color: #555;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  min-height: 22px;
+  color: #777;
+  font-size: 12px;
+}
+
+.suggestion-arrow {
+  margin-right: 8px;
+  color: #555;
+}
+
+.suggestion-command {
+  color: #9d9d9d;
+  min-width: 80px;
+}
+
+.suggestion-description {
+  color: #4f4f4f;
+}
+
+@keyframes suggestion-in {
+  from {
+    opacity: 0;
+    transform: translateY(-3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terminal-output {
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-output-line {
+  min-height: 1.5em;
+  white-space: pre-wrap;
+  animation: terminalLineReveal 0.18s ease-out;
+}
+
+@keyframes terminalLineReveal {
+  from {
+    opacity: 0;
+    transform: translateY(3px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.terminal-output-success {
+  opacity: 1;
+}
+
+.terminal-output-info {
+  opacity: 1;
+}
+
+.terminal-output-warning {
+  opacity: 1;
+}
+
+.terminal-output-error {
+  opacity: 1;
+}
+
+.terminal-output-system {
+  opacity: 1;
+}
