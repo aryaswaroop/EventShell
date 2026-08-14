@@ -1,15 +1,21 @@
-import EVENT_CONFIG from '../../config/eventConfig'
+import { getEvent } from '../../api/eventApi'
+
+const EVENT_ID = 'eventshell-demo-001'
 
 const eventLocationCommand = {
-  name: 'event.location',
+    name: 'event.location',
 
-  description: 'Show event location',
+    description: 'Show event location',
 
-  execute: () => [
-    'EVENT LOCATION',
-    '',
-    `Location : ${EVENT_CONFIG.location}`,
-  ],
+    execute: async () => {
+        const event = await getEvent(EVENT_ID)
+
+        return [
+            'EVENT LOCATION',
+            '',
+            `Location : ${event.location}`,
+        ]
+    },
 }
 
 export default eventLocationCommand

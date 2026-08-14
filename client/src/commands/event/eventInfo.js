@@ -1,19 +1,25 @@
-import EVENT_CONFIG from '../../config/eventConfig'
+import { getEvent } from '../../api/eventApi'
+
+const EVENT_ID = 'eventshell-demo-001'
 
 const eventInfoCommand = {
     name: 'event.info',
 
     description: 'Show event information',
 
-    execute: () => [
-        'EVENT INFORMATION',
-        '',
-        `Name     : ${EVENT_CONFIG.name}`,
-        `Type     : ${EVENT_CONFIG.type.label}`,
-        `Category : ${EVENT_CONFIG.type.category}`,
-        `Status   : ${EVENT_CONFIG.status}`,
-        `Host     : ${EVENT_CONFIG.host}`,
-    ],
+    execute: async () => {
+        const event = await getEvent(EVENT_ID)
+
+        return [
+            'EVENT INFORMATION',
+            '',
+            `Name     : ${event.name}`,
+            `Type     : ${event.type.label}`,
+            `Category : ${event.type.category}`,
+            `Status   : ${event.status}`,
+            `Host     : ${event.host}`,
+        ]
+    },
 }
 
 export default eventInfoCommand

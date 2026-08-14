@@ -90,6 +90,20 @@ const COMMAND_METADATA = {
     aliases: [],
   },
 
+  'event.schedule': {
+    description: 'Show event schedule',
+    category: 'EVENT',
+    permission: 'PUBLIC',
+    aliases: [],
+  },
+
+  'event.register': {
+    description: 'Register for the event',
+    category: 'EVENT',
+    permission: 'PUBLIC',
+    aliases: [],
+  },
+
   'event.data': {
     description: 'Show complete event data',
     category: 'EVENT',

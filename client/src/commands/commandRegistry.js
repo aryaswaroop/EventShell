@@ -14,6 +14,8 @@ import identityCommand from './core/identity'
 import systemInfoCommand from './core/systemInfo'
 import systemStatusCommand from './core/systemStatus'
 import systemEventCommand from './core/systemEvent'
+import eventScheduleCommand from './event/eventSchedule'
+import eventRegisterCommand from './event/eventRegister'
 
 const COMMANDS = {
     [helpCommand.name]: helpCommand,
@@ -32,6 +34,8 @@ const COMMANDS = {
     [systemInfoCommand.name]: systemInfoCommand,
     [systemStatusCommand.name]: systemStatusCommand,
     [systemEventCommand.name]: systemEventCommand,
+    [eventScheduleCommand.name]: eventScheduleCommand,
+    [eventRegisterCommand.name]: eventRegisterCommand,
 }
 
 export default COMMANDS;

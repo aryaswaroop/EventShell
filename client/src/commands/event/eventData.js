@@ -1,24 +1,30 @@
-import EVENT_DATA from '../../config/eventData'
+import { getEvent } from '../../api/eventApi'
+
+const EVENT_ID = 'eventshell-demo-001'
 
 const eventDataCommand = {
     name: 'event.data',
 
     description: 'Show complete event data',
 
-    execute: () => [
-        'EVENT DATA',
-        '',
-        `ID          : ${EVENT_DATA.id}`,
-        `Name        : ${EVENT_DATA.name}`,
-        `Type        : ${EVENT_DATA.type.label}`,
-        `Category    : ${EVENT_DATA.type.category}`,
-        `Status      : ${EVENT_DATA.status}`,
-        `Date        : ${EVENT_DATA.date}`,
-        `Time        : ${EVENT_DATA.time}`,
-        `Location    : ${EVENT_DATA.location}`,
-        `Host        : ${EVENT_DATA.host}`,
-        `Description : ${EVENT_DATA.description}`,
-    ],
+    execute: async () => {
+        const event = await getEvent(EVENT_ID)
+
+        return [
+            'EVENT DATA',
+            '',
+            `ID          : ${event.eventId}`,
+            `Name        : ${event.name}`,
+            `Type        : ${event.type.label}`,
+            `Category    : ${event.type.category}`,
+            `Status      : ${event.status}`,
+            `Date        : ${event.date}`,
+            `Time        : ${event.time}`,
+            `Location    : ${event.location}`,
+            `Host        : ${event.host}`,
+            `Description : ${event.description}`,
+        ]
+    },
 }
 
 export default eventDataCommand

@@ -35,27 +35,23 @@ function App() {
 
   const BOOT_SEQUENCE = [
     {
-      text: 'Initializing EventShell Runtime...',
+      text: 'Preparing your EventShell invitation...',
       delay: 500,
     },
     {
-      text: 'Loading terminal modules............. OK',
-      delay: 700,
-    },
-    {
-      text: 'Loading event engine................. OK',
+      text: 'Loading event experience............. OK',
       delay: 700,
     },
     {
       text: 'Connecting to event database......... OK',
-      delay: 800,
-    },
-    {
-      text: 'Verifying event credentials.......... OK',
       delay: 700,
     },
     {
-      text: 'Establishing secure session.......... OK',
+      text: 'Verifying event details.............. OK',
+      delay: 700,
+    },
+    {
+      text: 'Establishing event connection........ OK',
       delay: 800,
     },
   ]
@@ -199,7 +195,7 @@ function App() {
         // EXECUTE COMMAND
         // ----------------------------------------------
 
-        const commandOutput = commandData.execute({
+        const commandOutput = await commandData.execute({
           arguments: parsedCommand.arguments,
           argumentText: parsedCommand.argumentText,
         })
@@ -572,20 +568,31 @@ function App() {
             {!isBooting && (
               <>
                 <div className="boot-success">
-                  Connection established.
+                  Event connection established.
                 </div>
 
-                <div className="boot-success">
-                  Welcome to EventShell.
+                <div className="event-welcome">
+                  <div className="event-welcome-label">
+                    YOU ARE INVITED TO
+                  </div>
+
+                  <div className="event-welcome-title">
+                    {EVENT_CONFIG.name}
+                  </div>
+
+                  <div className="event-welcome-meta">
+                    {EVENT_CONFIG.type.label} · {EVENT_CONFIG.date}
+                  </div>
+
+                  <div className="event-welcome-message">
+                    A special celebration powered by EventShell.
+                  </div>
                 </div>
 
                 <div className="intro-help">
-                  Type{' '}
-                  <span>
-                    "help"
-                  </span>{' '}
-                  to see available
-                  commands.
+                  Explore this event with commands or try{' '}
+                  <span>"help"</span>{' '}
+                  to see what you can discover.
                 </div>
               </>
             )}
@@ -635,8 +642,8 @@ function App() {
 
                 <div
                   className={`command-output ${item.type === 'error'
-                      ? 'output-error'
-                      : ''
+                    ? 'output-error'
+                    : ''
                     }`}
                 >
                   <AnimatedOutput
@@ -762,6 +769,62 @@ function App() {
 
                   </div>
                 )}
+
+              {/* ---------------------------------------- */}
+              {/* QUICK ACTIONS */}
+              {/* ---------------------------------------- */}
+
+              {!command.trim() && !isExecuting && (
+                <div className="quick-actions">
+
+                  <div className="quick-actions-label">
+                    Explore this event
+                  </div>
+
+                  <div className="quick-actions-grid">
+
+                    {[
+                      {
+                        command: 'event.info',
+                        label: 'Event Details',
+                      },
+                      {
+                        command: 'event.schedule',
+                        label: 'Schedule',
+                      },
+                      {
+                        command: 'event.location',
+                        label: 'Location',
+                      },
+                      {
+                        command: 'event.host',
+                        label: 'Host',
+                      },
+                      {
+                        command: 'event.register',
+                        label: 'Register',
+                      },
+                    ]
+                      .filter(({ command }) =>
+                        Boolean(resolveCommand(command)?.command),
+                      )
+                      .map(({ command, label }) => (
+                        <button
+                          key={command}
+                          type="button"
+                          className="quick-action-button"
+                          onClick={() =>
+                            executeCommand(command)
+                          }
+                        >
+                          {label}
+                        </button>
+                      ))}
+
+                  </div>
+
+                </div>
+              )}
 
             </>
           )}

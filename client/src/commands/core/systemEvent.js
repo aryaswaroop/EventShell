@@ -1,19 +1,25 @@
-import EVENT_CONFIG from '../../config/eventConfig'
+import { getEvent } from '../../api/eventApi'
+
+const EVENT_ID = 'eventshell-demo-001'
 
 const systemEventCommand = {
     name: 'system.event',
 
     description: 'Show current event',
 
-    execute: () => [
-        'CURRENT EVENT',
-        '',
-        `ID          : ${EVENT_CONFIG.id}`,
-        `Name        : ${EVENT_CONFIG.name}`,
-        `Type        : ${EVENT_CONFIG.type.label}`,
-        `Category    : ${EVENT_CONFIG.type.category}`,
-        `Status      : ${EVENT_CONFIG.status}`,
-    ],
+    execute: async () => {
+        const event = await getEvent(EVENT_ID)
+
+        return [
+            'CURRENT EVENT',
+            '',
+            `ID          : ${event.eventId}`,
+            `Name        : ${event.name}`,
+            `Type        : ${event.type.label}`,
+            `Category    : ${event.type.category}`,
+            `Status      : ${event.status}`,
+        ]
+    },
 }
 
 export default systemEventCommand
